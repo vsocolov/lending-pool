@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>data-source</module>
+        <module>lending-data-source</module>
         <module>lending-ui</module>
     </modules>
 
