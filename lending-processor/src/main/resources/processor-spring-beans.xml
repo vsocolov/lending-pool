@@ -13,6 +13,8 @@
     <bean id="lendingBundleServiceImpl"
           class="com.vsocolov.lendingpool.processor.service.impl.BundleServiceImpl"/>
 
+    <bean id="financialService" class="com.vsocolov.lendingpool.processor.service.impl.FinancialServiceImpl"/>
+
     <bean id="lenderRecordToLenderConverter"
           class="com.vsocolov.lendingpool.processor.converter.LenderRecordToLenderConverter">
         <property name="bundleSplitAmount" value="${bundle.split.amount}"/>
