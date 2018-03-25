@@ -13,11 +13,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Collections;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.sameInstance;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.collection.IsEmptyCollection.empty;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LendingServiceImplTest {
@@ -44,5 +45,13 @@ public class LendingServiceImplTest {
         final List<Lender> lenders = service.composeLendingBundles(lenderRecords);
         assertThat(lenders, hasSize(1));
         assertThat(lenders.get(0), sameInstance(expectedLender));
+    }
+
+    @Test
+    public void composeLendingBundles_should_not_call_converter_if_record_list_is_empty() {
+        final List<Lender> lenders = service.composeLendingBundles(Collections.emptyList());
+
+        assertThat(lenders, is(empty()));
+        verifyZeroInteractions(lenderRecordToLenderConverter);
     }
 }
