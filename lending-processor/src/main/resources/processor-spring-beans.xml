@@ -8,11 +8,13 @@
     <context:annotation-config/>
     <context:property-placeholder location="application.properties"/>
 
-    <bean id="lendingService" class="com.vsocolov.lendingpool.processor.service.impl.LendingServiceImpl">
-        <property name="lendingPeriod" value="${lending.period.months}"/>
-    </bean>
+    <bean id="lendingService" class="com.vsocolov.lendingpool.processor.service.impl.LendingServiceImpl"/>
 
-    <bean id="lenderRecordToLenderConverter" class="com.vsocolov.lendingpool.processor.converter.LenderRecordToLenderConverter">
+    <bean id="lendingBundleServiceImpl"
+          class="com.vsocolov.lendingpool.processor.service.impl.BundleServiceImpl"/>
+
+    <bean id="lenderRecordToLenderConverter"
+          class="com.vsocolov.lendingpool.processor.converter.LenderRecordToLenderConverter">
         <property name="bundleSplitAmount" value="${bundle.split.amount}"/>
     </bean>
 

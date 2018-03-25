@@ -13,7 +13,7 @@ public class LenderRecordToLenderConverter implements Converter<LenderRecord, Le
     private Integer bundleSplitAmount;
 
     @Required
-    protected void setBundleSplitAmount(Integer bundleSplitAmount) {
+    public void setBundleSplitAmount(Integer bundleSplitAmount) {
         this.bundleSplitAmount = bundleSplitAmount;
     }
 

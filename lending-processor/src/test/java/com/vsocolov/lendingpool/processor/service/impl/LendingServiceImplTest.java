@@ -3,7 +3,6 @@ package com.vsocolov.lendingpool.processor.service.impl;
 import com.vsocolov.lendingpool.commons.data.LenderRecord;
 import com.vsocolov.lendingpool.processor.converter.LenderRecordToLenderConverter;
 import com.vsocolov.lendingpool.processor.data.Lender;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,27 +28,22 @@ public class LendingServiceImplTest {
     @Mock
     private LenderRecordToLenderConverter lenderRecordToLenderConverter;
 
-    @Before
-    public void setUp() {
-        service.setLendingPeriod(36);
-    }
-
     @Test
-    public void composeLendingBundles_should_call_converter_and_return_lender_list() {
+    public void fetchLendingPool_should_call_converter_and_return_lender_list() {
         final LenderRecord lenderRecord = mock(LenderRecord.class);
         final List<LenderRecord> lenderRecords = Collections.singletonList(lenderRecord);
         final Lender expectedLender = new Lender("John", 0.07, 1000.0);
 
         when(lenderRecordToLenderConverter.convert(lenderRecord)).thenReturn(expectedLender);
 
-        final List<Lender> lenders = service.composeLendingBundles(lenderRecords);
+        final List<Lender> lenders = service.fetchLendingPool(lenderRecords);
         assertThat(lenders, hasSize(1));
         assertThat(lenders.get(0), sameInstance(expectedLender));
     }
 
     @Test
-    public void composeLendingBundles_should_not_call_converter_if_record_list_is_empty() {
-        final List<Lender> lenders = service.composeLendingBundles(Collections.emptyList());
+    public void fetchLendingPool_should_not_call_converter_if_record_list_is_empty() {
+        final List<Lender> lenders = service.fetchLendingPool(Collections.emptyList());
 
         assertThat(lenders, is(empty()));
         verifyZeroInteractions(lenderRecordToLenderConverter);
