@@ -1,5 +1,7 @@
 package com.vsocolov.lendingpool.ui;
 
+import com.vsocolov.lendingpool.commons.enums.ExceptionType;
+import com.vsocolov.lendingpool.commons.exceptions.LendingException;
 import com.vsocolov.lendingpool.ui.facade.LendingPoolFacade;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.context.ApplicationContext;
@@ -20,10 +22,10 @@ public class AppEntryPoint {
 
     private static void assertInputs(final String[] args) {
         if (args.length < 2)
-            throw new RuntimeException("Invalid number of arguments.");
+            throw new LendingException(ExceptionType.INVALID_NUMBER_OF_ARGUMENTS);
 
         if (!NumberUtils.isCreatable(args[1]))
-            throw new RuntimeException("Amount argument is invalid.");
+            throw new LendingException(ExceptionType.AMOUNT_ARGUMENT_INVALID);
     }
 
 }

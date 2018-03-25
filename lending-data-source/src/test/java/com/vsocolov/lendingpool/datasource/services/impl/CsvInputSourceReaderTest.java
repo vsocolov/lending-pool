@@ -1,7 +1,8 @@
 package com.vsocolov.lendingpool.datasource.services.impl;
 
-import com.vsocolov.lendingpool.datasource.converter.RecordToLenderConverter;
-import com.vsocolov.lendingpool.datasource.data.Lender;
+import com.vsocolov.lendingpool.commons.data.LenderRecord;
+import com.vsocolov.lendingpool.datasource.converter.RecordToLenderRecordConverter;
+import com.vsocolov.lendingpool.datasource.data.CsvLenderRecord;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,29 +33,29 @@ public class CsvInputSourceReaderTest {
     private CsvInputSourceReader reader;
 
     @Mock
-    private RecordToLenderConverter converter;
+    private RecordToLenderRecordConverter converter;
 
     @Test
     public void parseLendersSource_should_return_list_of_lenders_if_there_are_lenders_in_source() {
         final Path path = Paths.get(INPUT_SOURCE);
 
-        when(converter.convert(any(CSVRecord.class))).thenReturn(Optional.of(mock(Lender.class)));
+        when(converter.convert(any(CSVRecord.class))).thenReturn(Optional.of(mock(CsvLenderRecord.class)));
 
-        final List<Lender> lenders = reader.parseLendersSource(path);
+        final List<LenderRecord> lenders = reader.parseLendersSource(path);
 
         assertThat(lenders, hasSize(8));
     }
 
     @Test
     public void parseLendersSource_should_return_empty_list_if_input_file_does_not_exist() {
-        final List<Lender> lenders = reader.parseLendersSource(Paths.get(NON_EXISTENT_SOURCE));
+        final List<LenderRecord> lenders = reader.parseLendersSource(Paths.get(NON_EXISTENT_SOURCE));
 
         assertThat(lenders, is(empty()));
     }
 
     @Test
     public void parseLendersSource_should_return_empty_list_if_input_file_is_invalid() {
-        final List<Lender> lenders = reader.parseLendersSource(Paths.get(INVALID_SOURCE_FILE));
+        final List<LenderRecord> lenders = reader.parseLendersSource(Paths.get(INVALID_SOURCE_FILE));
 
         assertThat(lenders, is(empty()));
     }

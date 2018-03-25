@@ -1,4 +1,4 @@
-package com.vsocolov.lendingpool.datasource.data.enums;
+package com.vsocolov.lendingpool.datasource.enums;
 
 import java.util.Arrays;
 

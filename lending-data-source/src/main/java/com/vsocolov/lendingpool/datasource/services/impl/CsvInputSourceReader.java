@@ -1,8 +1,8 @@
 package com.vsocolov.lendingpool.datasource.services.impl;
 
-import com.vsocolov.lendingpool.datasource.converter.RecordToLenderConverter;
-import com.vsocolov.lendingpool.datasource.data.Lender;
-import com.vsocolov.lendingpool.datasource.data.enums.CsvSourceHeader;
+import com.vsocolov.lendingpool.commons.data.LenderRecord;
+import com.vsocolov.lendingpool.datasource.converter.RecordToLenderRecordConverter;
+import com.vsocolov.lendingpool.datasource.enums.CsvSourceHeader;
 import com.vsocolov.lendingpool.datasource.services.InputSourceReader;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -23,10 +23,10 @@ public class CsvInputSourceReader implements InputSourceReader {
     private static final Logger LOG = Logger.getLogger(CsvInputSourceReader.class);
 
     @Autowired
-    private RecordToLenderConverter converter;
+    private RecordToLenderRecordConverter converter;
 
     @Override
-    public List<Lender> parseLendersSource(final Path path) {
+    public List<LenderRecord> parseLendersSource(final Path path) {
         try {
             try (final Reader reader = new FileReader(path.toFile())) {
                 final Iterable<CSVRecord> records = CSVFormat.DEFAULT

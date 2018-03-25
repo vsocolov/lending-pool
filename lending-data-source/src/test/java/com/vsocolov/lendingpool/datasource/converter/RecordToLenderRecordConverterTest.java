@@ -1,7 +1,7 @@
 package com.vsocolov.lendingpool.datasource.converter;
 
-import com.vsocolov.lendingpool.datasource.data.Lender;
-import com.vsocolov.lendingpool.datasource.data.enums.CsvSourceHeader;
+import com.vsocolov.lendingpool.datasource.data.CsvLenderRecord;
+import com.vsocolov.lendingpool.datasource.enums.CsvSourceHeader;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,9 +21,9 @@ import static org.powermock.api.mockito.PowerMockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(CSVRecord.class)
-public class RecordToLenderConverterTest {
+public class RecordToLenderRecordConverterTest {
 
-    private RecordToLenderConverter converter = new RecordToLenderConverter();
+    private RecordToLenderRecordConverter converter = new RecordToLenderRecordConverter();
 
     private CSVRecord record;
 
@@ -40,7 +40,7 @@ public class RecordToLenderConverterTest {
         when(record.get(CsvSourceHeader.Available)).thenReturn("640.0");
         when(record.get(CsvSourceHeader.Rate)).thenReturn("0.075");
 
-        final Optional<Lender> lender = converter.convert(record);
+        final Optional<CsvLenderRecord> lender = converter.convert(record);
 
         assertThat(lender.get().getName(), equalTo("John"));
         assertThat(lender.get().getAmount(), equalTo(640.0));
@@ -53,7 +53,7 @@ public class RecordToLenderConverterTest {
         when(record.isConsistent()).thenReturn(false);
         when(record.isMapped(any(String.class))).thenReturn(false);
 
-        final Optional<Lender> lender = converter.convert(record);
+        final Optional<CsvLenderRecord> lender = converter.convert(record);
         assertThat(lender, equalTo(Optional.empty()));
     }
 
@@ -65,7 +65,7 @@ public class RecordToLenderConverterTest {
         when(record.get(CsvSourceHeader.Available)).thenReturn("text");
         when(record.get(CsvSourceHeader.Rate)).thenReturn("text");
 
-        final Optional<Lender> lender = converter.convert(record);
+        final Optional<CsvLenderRecord> lender = converter.convert(record);
 
         assertThat(lender, equalTo(Optional.empty()));
         verify(record, times(3)).isMapped(any(String.class));

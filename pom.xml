@@ -10,10 +10,11 @@
     <modules>
         <module>lending-data-source</module>
         <module>lending-ui</module>
+        <module>lending-processor</module>
+        <module>lending-commons</module>
     </modules>
 
     <properties>
-        <project.version>0.0.1-SNAPSHOT</project.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <mavem.compiler.version>3.7.0</mavem.compiler.version>

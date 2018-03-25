@@ -1,8 +1,8 @@
 package com.vsocolov.lendingpool.datasource.data;
 
-import java.io.Serializable;
+import com.vsocolov.lendingpool.commons.data.LenderRecord;
 
-public class Lender implements Serializable {
+public class CsvLenderRecord implements LenderRecord {
 
     private final String name;
 
@@ -10,7 +10,7 @@ public class Lender implements Serializable {
 
     private final double amount;
 
-    public Lender(final String name, final double rate, final double amount) {
+    public CsvLenderRecord(final String name, final double rate, final double amount) {
         this.name = name;
         this.rate = rate;
         this.amount = amount;
