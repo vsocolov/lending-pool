@@ -1,9 +1,11 @@
 package com.vsocolov.lendingpool.ui.facade.impl;
 
-import com.vsocolov.lendingpool.datasource.data.Lender;
+import com.vsocolov.lendingpool.commons.data.LenderRecord;
 import com.vsocolov.lendingpool.datasource.services.InputSourceReader;
-import com.vsocolov.lendingpool.ui.data.LoanData;
+import com.vsocolov.lendingpool.processor.service.LendingServiceTemplate;
+import com.vsocolov.lendingpool.ui.converter.LoanInfoToLoanDataConverter;
 import com.vsocolov.lendingpool.ui.facade.LendingPoolFacade;
+import com.vsocolov.lendingpool.ui.data.LoanData;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.nio.file.Paths;
@@ -15,13 +17,17 @@ public class LendingPoolFacadeImpl implements LendingPoolFacade {
     @Autowired
     private InputSourceReader inputSourceReader;
 
-    @Override
-    public Optional<LoanData> calculateLoan(String path, double amount) {
-        return Optional.empty();
-    }
+    @Autowired
+    private LendingServiceTemplate lendingService;
+
+    @Autowired
+    private LoanInfoToLoanDataConverter loanInfoToLoanDataConverter;
 
     @Override
-    public List<Lender> getLenders(final String path) {
-        return inputSourceReader.parseLendersSource(Paths.get(path));
+    public Optional<LoanData> calculateLoan(String path, double amount) {
+        final List<LenderRecord> lenderRecords = inputSourceReader.parseLendersSource(Paths.get(path));
+
+        return lendingService.fetchLoanInfo(amount, lenderRecords)
+                .flatMap(loanInfo -> loanInfoToLoanDataConverter.convert(loanInfo));
     }
 }

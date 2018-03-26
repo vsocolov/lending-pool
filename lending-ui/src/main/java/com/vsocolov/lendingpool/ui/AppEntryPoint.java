@@ -3,9 +3,12 @@ package com.vsocolov.lendingpool.ui;
 import com.vsocolov.lendingpool.commons.enums.ExceptionType;
 import com.vsocolov.lendingpool.commons.exceptions.LendingException;
 import com.vsocolov.lendingpool.ui.facade.LendingPoolFacade;
+import com.vsocolov.lendingpool.ui.data.LoanData;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.Optional;
 
 public class AppEntryPoint {
     private static final String APP_CONTEXT_FILE = "ui-spring-beans.xml";
@@ -16,8 +19,10 @@ public class AppEntryPoint {
         final ApplicationContext ctx = new ClassPathXmlApplicationContext(APP_CONTEXT_FILE);
 
         final LendingPoolFacade facade = ctx.getBean(LendingPoolFacade.class);
-        facade.getLenders(args[0])
-                .forEach(lender -> System.out.println(lender.getName()));
+
+        final Optional<LoanData> loanInfo = facade.calculateLoan(args[0], Double.valueOf(args[1]));
+
+        loanInfo.ifPresent(System.out::println);
     }
 
     private static void assertInputs(final String[] args) {

@@ -26,7 +26,6 @@ public class RecordToLenderRecordConverter implements Converter<CSVRecord, Optio
         return Optional.empty();
     }
 
-
     private boolean isValidRecord(final CSVRecord record) {
         return record != null && record.isConsistent()
                 && record.isMapped(CsvSourceHeader.Lender.name())

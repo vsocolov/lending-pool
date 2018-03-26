@@ -1,42 +1,62 @@
 package com.vsocolov.lendingpool.ui.data;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Currency;
+import java.util.Locale;
 
-public class LoanData implements Serializable {
-    private double requestedAmount;
-    private double rate;
-    private double monthlyRepayment;
-    private double totalRepayment;
+public class LoanData {
+    private BigDecimal requestedAmount;
 
-    public double getRequestedAmount() {
+    private BigDecimal rate;
+
+    private BigDecimal monthlyRepayment;
+
+    private BigDecimal totalRepayment;
+
+    public LoanData() {
+        super();
+    }
+
+    public BigDecimal getRequestedAmount() {
         return requestedAmount;
     }
 
-    public void setRequestedAmount(double requestedAmount) {
+    public void setRequestedAmount(final BigDecimal requestedAmount) {
         this.requestedAmount = requestedAmount;
     }
 
-    public double getRate() {
+    public BigDecimal getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(final BigDecimal rate) {
         this.rate = rate;
     }
 
-    public double getMonthlyRepayment() {
+    public BigDecimal getMonthlyRepayment() {
         return monthlyRepayment;
     }
 
-    public void setMonthlyRepayment(double monthlyRepayment) {
+    public void setMonthlyRepayment(final BigDecimal monthlyRepayment) {
         this.monthlyRepayment = monthlyRepayment;
     }
 
-    public double getTotalRepayment() {
+    public BigDecimal getTotalRepayment() {
         return totalRepayment;
     }
 
-    public void setTotalRepayment(double totalRepayment) {
+    public void setTotalRepayment(final BigDecimal totalRepayment) {
         this.totalRepayment = totalRepayment;
+    }
+
+    @Override
+    public String toString() {
+        final String currencySymbol = Currency.getInstance(Locale.UK).getSymbol(Locale.UK);
+        final StringBuilder sb = new StringBuilder()
+                .append("\nRequested amount: ").append(currencySymbol).append(requestedAmount)
+                .append("\nRate: ").append(rate).append("%")
+                .append("\nMonthly repayment: ").append(currencySymbol).append(monthlyRepayment)
+                .append("\nTotal repayment: ").append(currencySymbol).append(totalRepayment);
+        return sb.toString();
     }
 }

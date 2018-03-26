@@ -15,7 +15,12 @@
     <dependencies>
         <dependency>
             <groupId>com.vsocolov.lendingpool</groupId>
-            <artifactId>data-source</artifactId>
+            <artifactId>lending-data-source</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.vsocolov.lendingpool</groupId>
+            <artifactId>lending-processor</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -48,6 +53,11 @@
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

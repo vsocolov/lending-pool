@@ -8,6 +8,9 @@
     <context:annotation-config/>
 
     <import resource="data-source-spring-beans.xml"/>
+    <import resource="processor-spring-beans.xml"/>
 
     <bean id="lendingPoolFacade" class="com.vsocolov.lendingpool.ui.facade.impl.LendingPoolFacadeImpl"/>
+
+    <bean id="loanInfoToLoanDataConverter" class="com.vsocolov.lendingpool.ui.converter.LoanInfoToLoanDataConverter"/>
 </beans>
