@@ -8,7 +8,7 @@
 
     <parent>
         <groupId>com.vsocolov.lendingpool</groupId>
-        <artifactId>lending-pool</artifactId>
+        <artifactId>lending-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
