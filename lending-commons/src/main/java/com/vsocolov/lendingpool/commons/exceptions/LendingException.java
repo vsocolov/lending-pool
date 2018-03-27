@@ -8,7 +8,4 @@ public class LendingException extends RuntimeException {
         super(exceptionType.getMessage());
     }
 
-    public LendingException(final ExceptionType exceptionType, final Throwable cause) {
-        super(exceptionType.getMessage(), cause);
-    }
 }

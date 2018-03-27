@@ -6,7 +6,6 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
-    <context:property-placeholder location="application.properties"/>
 
     <bean id="lendingService" class="com.vsocolov.lendingpool.processor.service.impl.LendingServiceImpl">
         <property name="lendingPeriodMonths" value="${lending.period.months}"/>

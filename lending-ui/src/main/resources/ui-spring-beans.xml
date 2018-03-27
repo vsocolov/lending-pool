@@ -6,6 +6,7 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
+    <context:property-placeholder location="application.properties"/>
 
     <import resource="data-source-spring-beans.xml"/>
     <import resource="processor-spring-beans.xml"/>
@@ -13,4 +14,10 @@
     <bean id="lendingPoolFacade" class="com.vsocolov.lendingpool.ui.facade.impl.LendingPoolFacadeImpl"/>
 
     <bean id="loanInfoToLoanDataConverter" class="com.vsocolov.lendingpool.ui.converter.LoanInfoToLoanDataConverter"/>
+
+    <bean id="inputValidator" class="com.vsocolov.lendingpool.ui.validation.InputValidator">
+        <property name="amountMinValue" value="${lending.amount.minValue}"/>
+        <property name="amountMaxValue" value="${lending.amount.maxValue}"/>
+        <property name="amountIncrementStep" value="${lending.amount.increment}"/>
+    </bean>
 </beans>

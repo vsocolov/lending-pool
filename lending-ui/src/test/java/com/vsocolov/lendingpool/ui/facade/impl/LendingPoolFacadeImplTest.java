@@ -6,6 +6,7 @@ import com.vsocolov.lendingpool.processor.data.LoanInfo;
 import com.vsocolov.lendingpool.processor.service.LendingServiceTemplate;
 import com.vsocolov.lendingpool.ui.converter.LoanInfoToLoanDataConverter;
 import com.vsocolov.lendingpool.ui.data.LoanData;
+import com.vsocolov.lendingpool.ui.validation.InputValidatorTemplate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
@@ -40,6 +41,9 @@ public class LendingPoolFacadeImplTest {
 
     @Mock
     private LoanInfoToLoanDataConverter loanInfoToLoanDataConverter;
+
+    @Mock
+    private InputValidatorTemplate inputValidator;
 
     @Test
     public void calculateLoan_should_calculate_loan_if_lender_records_exist() {
@@ -77,5 +81,14 @@ public class LendingPoolFacadeImplTest {
         orderCalls.verify(inputSourceReader).parseLendersSource(any(Path.class));
         orderCalls.verify(lendingService).fetchLoanInfo(eq(amount), anyList());
         verifyZeroInteractions(loanInfoToLoanDataConverter);
+    }
+
+    @Test
+    public void validateInputs_should_call_validator() {
+        final String[] args = {"path", "1000"};
+
+        facade.validateInputs(args);
+
+        verify(inputValidator).validate(args);
     }
 }

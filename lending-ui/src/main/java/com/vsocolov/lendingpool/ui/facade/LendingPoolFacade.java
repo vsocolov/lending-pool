@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface LendingPoolFacade {
 
     Optional<LoanData> calculateLoan(String path, double amount);
+
+    void validateInputs(String[] args);
 }
