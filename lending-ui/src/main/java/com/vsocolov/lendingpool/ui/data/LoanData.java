@@ -56,7 +56,8 @@ public class LoanData {
                 .append("\nRequested amount: ").append(currencySymbol).append(requestedAmount)
                 .append("\nRate: ").append(rate).append("%")
                 .append("\nMonthly repayment: ").append(currencySymbol).append(monthlyRepayment)
-                .append("\nTotal repayment: ").append(currencySymbol).append(totalRepayment);
+                .append("\nTotal repayment: ").append(currencySymbol).append(totalRepayment)
+                .append("\n");
         return sb.toString();
     }
 }
